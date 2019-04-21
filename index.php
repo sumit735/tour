@@ -133,7 +133,7 @@
                     <div class="col-6">
                         <ul id="top_links">
                             <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
-                            <li><a href="wishlist.php" id="access_link">Sign Up</a></li>
+                            <li><a href="signup.php" id="access_link">Sign Up</a></li>
                         </ul>
                     </div>
                 </div><!-- End row -->
@@ -815,16 +815,6 @@
 
 	<div id="toTop"></div><!-- Back to top button -->
 	
-	<!-- Search Menu -->
-	<div class="search-overlay-menu">
-		<span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
-		<form role="search" id="searchform" method="get">
-			<input value="" name="q" type="search" placeholder="Search..." />
-			<button type="submit"><i class="icon_set_1_icon-78"></i>
-			</button>
-		</form>
-	</div><!-- End Search Menu -->
-	
 	<!-- Sign In Popup -->
 	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 		<div class="small-dialog-header">
@@ -870,7 +860,6 @@
 		<!--form -->
 	</div>
 	<!-- /Sign In Popup -->
-
     <!-- Common scripts -->
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/common_scripts_min.js"></script>
