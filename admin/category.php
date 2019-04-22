@@ -1,3 +1,5 @@
+<?php include "../includes/db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +23,7 @@
   <!--end::Web font -->
       <!--begin::Base Styles -->
       <!--begin::Page Vendors -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link href="assets/vendors/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
   <!--end::Page Vendors -->
   <link href="assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
@@ -162,8 +165,8 @@
               <div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
                 <ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
                   <li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
-                    <a  href="tours.php" class="m-menu__link ">
-                      <span class="m-menu__item-here"></span>
+                    <a  href="index.php" class="m-menu__link ">
+                      <!-- <span class="m-menu__item-here"></span> -->
                       <span class="m-menu__link-text">
                         Dashboard
                       </span>
@@ -171,6 +174,7 @@
                   </li>
                   <li class="m-menu__item  m-menu__item--active"  aria-haspopup="true">
                     <a  href="category.php" class="m-menu__link ">
+                    <span class="m-menu__item-here"></span>
                       <span class="m-menu__link-text">
                         Categories
                       </span>
@@ -202,15 +206,186 @@
               </div>
             </div>
             <!-- end::Horizontal Menu -->
-          </div>
+            
+						</div>
+					</div>
+					<div class="m-grid__item m-grid__item--fluid m-grid m-grid--desktop m-grid--ver-desktop m-body__content">
+						<div class="m-grid__item m-grid__item--fluid m-wrapper">
+							<!-- BEGIN: Subheader -->
+							<div class="m-subheader ">
+								<div class="d-flex align-items-center">
+									<div class="mr-auto">
+										<h2 class="m-subheader__title ">
+											Categories
+                                        </h2>
+									</div>
+								</div>
+							<!-- END: Subheader -->
+							<div class="col-xs-6">
+                            <?php 
+                            
+                                if(isset($_POST['tour_submit'])) {
+                                     $tour_name = $_POST['tour_name'];
+
+                                     if($tour_name == "" || empty($tour_name)) {
+                                         echo "This field should not be empty";
+                                     } else {
+
+                                          $query = "INSERT INTO `tour_category` (tours_name) ";
+                                          $query .= "VALUE('{$tour_name}')";
+
+                                          $create_category_query = mysqli_query($connection, $query);
+
+                                          if(!$create_category_query) {
+                                              die("failed to insert category".mysqli_error($connection));
+                                          }
+
+                                     }
+                                }
+                            
+                            
+                            ?>
+
+                            <form action="category.php" method="post">
+
+                                <div class="form-group">
+
+                                    <input type="text" name="tour_name">
+                                
+                                </div>
+                                <div class="form-group">
+
+                                    <input type="submit" class="btn btn-primary" name="tour_submit" value="Add Tour">
+                                
+                                </div>
+                        
+                            </form>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                        <?php 
+                                    
+                            $query = "SELECT * FROM tour_category";
+                            $select_categories = mysqli_query($connection, $query);
+                                    
+                        ?>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Category Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <?php
+                                    
+                                        while($row = mysqli_fetch_assoc($select_categories)){
+                                            
+                                            $tour_id = $row['tours_id'];
+                                            $tour_title =  $row['tours_name'];
+
+                                            echo "<tr>";
+                                            echo "<td>{$tour_id}</td>";
+                                            echo "<td>{$tour_title}</td>";
+                                            echo "</tr>";
+                                        }
+                                    ?>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-6">
+                            
+                            <?php 
+                                
+                                if(isset($_POST['package_submit'])) {
+                                    $package_name = $_POST['package_name'];
+
+                                    if($package_name == "" || empty($package_name)) {
+                                        echo "This field should not be empty";
+                                    } else {
+
+                                        $query = "INSERT INTO `package_category` (package_name) ";
+                                        $query .= "VALUE('{$package_name}')";
+
+                                        $create_category_query = mysqli_query($connection, $query);
+
+                                        if(!$create_category_query) {
+                                            die("failed to insert category".mysqli_error($connection));
+                                        }
+
+                                    }
+                                }
+                                
+                                
+                            ?>
+                            
+                            <form action="category.php" method="post">
+
+                                <div class="form-group">
+
+                                    <input type="text" name="package_name">
+                                
+                                </div>
+                                <div class="form-group">
+
+                                    <input type="submit" class="btn btn-primary" name="package_submit" value="Add Package">
+                                
+                                </div>
+                        
+                            </form>
+    
+                        </div>
+                        <div class="col-xs-6">
+                            <?php 
+                                    
+                                $query = "SELECT * FROM package_category";
+                                $select_categories = mysqli_query($connection, $query);
+                                                
+                            ?>  
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Category Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        
+                                        while($row = mysqli_fetch_assoc($select_categories)){
+                                            
+                                            $package_id = $row['package_id'];
+                                            $package_title =  $row['package_name'];
+
+                                            echo "<tr>";
+                                            echo "<td>{$package_id}</td>";
+                                            echo "<td>{$package_title}</td>";
+                                            echo "</tr>";
+                                        }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>  
+                    </div>
+          
+                </div>
+        
+            </div>
+      
         </div>
-      </div>
     </div>
+      
+
 
   </body>
 
 
-
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
   <script src="assets/demo/demo4/base/scripts.bundle.js" type="text/javascript"></script>
   <!--end::Base Scripts -->
@@ -221,33 +396,3 @@
   <script src="assets/app/js/dashboard.js" type="text/javascript"></script>
 </body>
 </html>
-
-<!-- 
-
-<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
-                    <a  href="tours.php" class="m-menu__link m-menu__toggle">
-                      <span class="m-menu__item-here"></span>
-                      <span class="m-menu__link-text">
-                        Tours
-                      </span>
-                    </a>
-                  </li>
-                  <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
-                    <a  href="tours.php" class="m-menu__link m-menu__toggle">
-                      <span class="m-menu__item-here"></span>
-                      <span class="m-menu__link-text">
-                        Packages
-                      </span>
-                    </a>
-                  </li>
-                  <li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  data-menu-submenu-toggle="click" aria-haspopup="true">
-                    <a  href="tours.php" class="m-menu__link m-menu__toggle">
-                      <span class="m-menu__item-here"></span>
-                      <span class="m-menu__link-text">
-                        Cab Booking
-                      </span>
-                    </a>
-                  </li>
-
-
- -->

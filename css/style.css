@@ -5548,7 +5548,7 @@ div.datedropper.primary .pick-btn {
 }
 
 /*-------- 7.5 Sing In Modal --------*/
-.sign-in-dialog {
+/* .sign-in-dialog {
   background: #fff;
   padding: 30px;
   padding-top: 0;
@@ -5560,10 +5560,10 @@ div.datedropper.primary .pick-btn {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-}
+} */
 
 /* Popup close button*/
-.sign-in-dialog .mfp-close,
+/* .sign-in-dialog .mfp-close,
 #small-dialog .mfp-close {
   color: #666;
   background-color: #e4e4e4;
@@ -5586,9 +5586,9 @@ div.datedropper.primary .pick-btn {
   font-size: 24px;
   font-family: 'ElegantIcons';
   content: "\4d";
-}
+} */
 
-.small-dialog-header {
+/* .small-dialog-header {
   font-size: 18px;
   width: calc(100% + 60px);
   position: relative;
@@ -5635,9 +5635,9 @@ div.datedropper.primary .pick-btn {
 }
 .sign-in-dialog .form-group i.icon_lock_alt {
   top: 37px;
-}
+} */
 
-.checkboxes {
+/* .checkboxes {
   position: relative;
   color: #999;
 }
@@ -5667,9 +5667,9 @@ div.datedropper.primary .pick-btn {
   background-color: #eee;
   color: #555;
   outline: transparent;
-}
+} */
 
-#forgot_pw {
+/* #forgot_pw {
   background-color: #fff;
   position: absolute;
   left: 0;
@@ -5749,7 +5749,7 @@ a.social_bt.linkedin:before {
   display: inline-block;
   padding: 10px;
   font-style: italic;
-}
+} */
 
 /*-------- 7.6 Styles Switcher --------*/
 	#style-switcher h3 {
@@ -6540,16 +6540,13 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
 		right: 5%;
 	}
 	
-	a#access_link,
-	a#wishlist_link {
+	a#access_link{
 		position: relative;
 		text-indent: -999px;
 		width: 20px;
 		height: 20px;
 		display: block;
 	}
-	
-	#wishlist_link:before,
 	#access_link:before {
 		text-indent: 0px;
 		font-size: 20px;
